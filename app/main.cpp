@@ -1,7 +1,11 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <stack>
 #include <string>
 #include <cstdlib>
 
+using namespace std;
 
 /**
  * Función que muestra los participantes del grupo
@@ -15,6 +19,11 @@ void participantes(std::string programa);
  * @param argv argumentos
  * @return El código de salida del programa
  */
+
+void laberinto(){
+
+}
+
 int main(int argc, char** argv) {
 
     /**
@@ -31,8 +40,10 @@ int main(int argc, char** argv) {
 }
 
 void participantes(std::string programa) {
-    std::cout << std::endl << "=== Taller " << programa << " ===" << std::endl;
-    std::cout << std::endl << "Juanito"; // Reemplazar por su nombre
-    std::cout << std::endl << "Pedrito"; // Reemplazar por su nombre
-    std::cout << std::endl << "Dieguito" << std::endl; // Reemplazar por su nombre
+    std::cout << std::endl << "Taller 1: Resolucion de laberintos mediantes algoritmos" << std::endl;
+    std::cout << std::endl << "Integrantes:" << std::endl;
+    std::cout << std::endl << "- Pablo Garcia Urzua"; 
+    std::cout << std::endl << "- Nombre"; 
+    std::cout << std::endl << "- Nombre" << std::endl;
+    std::cout << std::endl << "Todos los completos reservados ©" << std::endl;  
 }
