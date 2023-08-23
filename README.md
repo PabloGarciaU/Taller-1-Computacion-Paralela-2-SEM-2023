@@ -3,7 +3,7 @@ Resolucion de laberintos mediante algoritmos en c++
 
 Integrantes:
 - Pablo Garcia Urzua
--
+- Victor Toledo Cerna
 -
 
 Computacion Paralela y Distribuida
