@@ -87,21 +87,15 @@ void menu(){
             cin>>columnas;
             cout<<"Largo: ";
             cin>>filas;
-            if(columnas < 10 || filas < 10 || columnas > 50 || filas > 50){
-                cout<<"El tamaño ingresado no es valido"<<endl;
-                system("pause");
-                break;
-            }
-            else{
-                system("cls");
-                cout<<"Generando laberinto..."<<endl;
-                system("pause");
-                break;
-            }
+            system("cls");
+            cout<<"Generando laberinto..."<<endl;
+			generarLaberinto(filas, columnas, densidad);
+            system("pause");
             break;
         case 2:
             system("cls");
-            cout<<"Salir"<<endl;
+            cout<<"Saliendo....."<<endl;
+			bucle++;
             break;
         default:
             system("cls");
