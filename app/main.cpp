@@ -63,11 +63,11 @@ void generaryresolverLaberinto(int filas, int columnas) {
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
             if (matriz[i][j] == 1) {
-                cout << "#"; // Pared
+                cout << matriz[i][j]; // Pared
             } else if (matriz[i][j] == 0) {
-                cout << "  "; // Espacio libre
+                cout << matriz[i][j]; // Espacio libre
             } else if (matriz[i][j] == 2) {
-                cout << "O "; // Camino más eficiente
+                cout << matriz[i][j]; // Camino más eficiente
             }
         }
         cout << "\n";
@@ -88,7 +88,7 @@ void menu(){
     cout<<"Programado por Pablo Garcia Urzua"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Computacion paralela y distribuida, seccion 411"<<endl;
-    cout<<"1. Generar un laberinto aleatorio"<<endl;
+    cout<<"1. Generar un laberinto aleatorio y resolverlo con una posible solucion"<<endl;
     cout<<"2. Salir"<<endl;
     cout<<"Ingrese una opcion: ";
     cin>>opcion;
