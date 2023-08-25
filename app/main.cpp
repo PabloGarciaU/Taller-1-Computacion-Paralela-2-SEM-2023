@@ -1,7 +1,15 @@
 #include <iostream>
 #include <cstdlib>
+#include <vector>
+#include <stack>
 
 using namespace std;
+
+/*
+
+Info
+
+*/
 
 // Variables utilizadas
 int bucle = 0;
@@ -12,7 +20,7 @@ int const densidad = 1;
 
 // Funciones utilizadas para crear y resolver el laberinto
 
-void generarLaberinto(int filas, int columnas, int densidad){
+void generaryresolverLaberinto(int filas, int columnas, int densidad){
     int **matriz;
 	matriz = new int *[filas];
 
@@ -52,7 +60,7 @@ void generarLaberinto(int filas, int columnas, int densidad){
 				
 		}
 	}
-	//pintar
+	//imprimir
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
 			if (matriz[i][j] == 1) {
@@ -75,7 +83,7 @@ void menu(){
     cout<<"Programado por Pablo Garcia Urzua"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Computacion paralela y distribuida, seccion 411"<<endl;
-    cout<<"1. Generar y resolver un laberinto aleatorio"<<endl;
+    cout<<"1. Generar un laberinto aleatorio"<<endl;
     cout<<"2. Salir"<<endl;
     cout<<"Ingrese una opcion: ";
     cin>>opcion;
@@ -89,7 +97,7 @@ void menu(){
             cin>>filas;
             system("cls");
             cout<<"Generando laberinto..."<<endl;
-			generarLaberinto(filas, columnas, densidad);
+			generaryresolverLaberinto(filas, columnas, densidad);
             system("pause");
             break;
         case 2:
