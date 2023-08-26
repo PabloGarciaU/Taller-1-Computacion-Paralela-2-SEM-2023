@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
 #include <vector>
@@ -38,38 +39,47 @@ void generaryresolverLaberinto(int filas, int columnas) {
         matriz[i] = new int[columnas];
     }
 
-    srand(time(NULL));
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            matriz[i][j] = rand() % 2; // 0 para espacio libre, 1 para pared
+    bool laberintoEncontrado = false;
+
+    while (!laberintoEncontrado) {
+        srand(time(NULL));
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                matriz[i][j] = rand() % 2; // 0 para espacio libre, 1 para pared
+            }
         }
+
+        // Marcar la entrada y la salida
+        matriz[0][1] = 0;                   // Entrada
+        matriz[filas - 1][columnas - 2] = 0; // Salida
+
+        int startX = 1;
+        int startY = 0;
+        int endX = columnas - 2;
+        int endY = filas - 1;
+
+        // Resolver el laberinto
+        laberintoEncontrado = resolverlaberinto(matriz, startX, startY, endX, endY);
     }
 
-    // Marcar la entrada y la salida
-    matriz[0][1] = 0;                   // Entrada
-    matriz[filas - 1][columnas - 2] = 0; // Salida
-
-    int startX = 1;
-    int startY = 0;
-    int endX = columnas - 2;
-    int endY = filas - 1;
-
-    // Resolver el laberinto
-    resolverlaberinto(matriz, startX, startY, endX, endY);
-
-    // Imprimir el laberinto con la entrada, salida y camino eficiente
+    // Crear y escribir en el archivo de texto
+    ofstream archivo("laberinto_resuelto.txt");
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
             if (matriz[i][j] == 1) {
-                cout << '#'; // Pared
+                archivo << '#'; // Pared
             } else if (matriz[i][j] == 0) {
-                cout << ' '; // Espacio libre
+                archivo << ' '; // Espacio libre
             } else if (matriz[i][j] == 2) {
-                cout << 'C'; // Camino más eficiente
+                archivo << 'o'; // Camino más eficiente
             }
         }
-        cout << "\n";
+        archivo << "\n";
     }
+    archivo.close();
+
+    // Imprimir mensaje de confirmación
+    cout << "Laberinto resuelto guardado en 'laberinto_resuelto.txt'" << endl;
 
     // Liberar memoria
     for (int i = 0; i < filas; i++) {
@@ -81,9 +91,11 @@ void generaryresolverLaberinto(int filas, int columnas) {
 void menu() {
     system("cls");
     cout << "---- Menu Taller 1 ----" << endl;
-    cout << "Programado por Pablo Garcia Urzua" << endl;
+    cout << "Programado por Pablo Garcia Urzua // Computacion paralela y distribuida, seccion 411" << endl << endl;
     cout << "------------------------" << endl;
-    cout << "Computacion paralela y distribuida, seccion 411" << endl;
+    cout << "El programa se basa en el algoritmo de busqueda de profundidad (DFS - Depth First Seach)" << endl;
+    cout <<"------------------------" << endl << endl;
+    cout << "Seleccione una opcion" << endl;
     cout << "1. Generar un laberinto aleatorio y resolverlo con una posible solucion" << endl;
     cout << "2. Salir" << endl;
     cout << "Ingrese una opcion: ";
@@ -91,15 +103,31 @@ void menu() {
     switch (opcion) {
         case 1:
             system("cls");
-            cout << "Ingrese los parametros del laberinto (Min 10x10, Max 50x50)" << endl;
+            cout << "Ingrese los parametros del laberinto (Min 5x5, Max 50x50)" << endl;
             cout << "Ancho: ";
             cin >> columnas;
-            cout << "Largo: ";
-            cin >> filas;
-            system("cls");
-            cout << "Generando laberinto..." << endl;
-            generaryresolverLaberinto(filas, columnas);
-            system("pause");
+            if(columnas < 5 || columnas > 50){
+                cout << "Ancho no valido, intentelo nuevamente" << endl;
+                system("pause");
+                break;
+            }
+            else{
+                cout << "Largo: ";
+                cin >> filas;
+                if(filas < 5 || filas > 50){
+                    system("cls");
+                    cout << "Largo no valido, intentelo nuevamente" << endl;
+                    system("pause");
+                    break;
+                }
+                    else{
+                        system("cls");
+                        cout << "Generando laberinto..." << endl;
+                        generaryresolverLaberinto(filas, columnas);
+                        system("pause");
+                    }
+            }
+
             break;
         case 2:
             system("cls");
