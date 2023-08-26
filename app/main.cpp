@@ -1,23 +1,17 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 #include <vector>
 #include <stack>
 
 using namespace std;
 
-/*
-
-Info
-
-*/
-
-// Variables utilizadas
 int bucle = 0;
 int opcion;
 int filas;
 int columnas;
 
-bool solveMaze(int **matriz, int x, int y, int endX, int endY) {
+bool resolverlaberinto(int **matriz, int x, int y, int endX, int endY) {
     if (x < 0 || y < 0 || x >= columnas || y >= filas || matriz[y][x] != 0)
         return false;
 
@@ -26,10 +20,10 @@ bool solveMaze(int **matriz, int x, int y, int endX, int endY) {
     if (x == endX && y == endY)
         return true;
 
-    if (solveMaze(matriz, x + 1, y, endX, endY) ||
-        solveMaze(matriz, x, y + 1, endX, endY) ||
-        solveMaze(matriz, x - 1, y, endX, endY) ||
-        solveMaze(matriz, x, y - 1, endX, endY))
+    if (resolverlaberinto(matriz, x + 1, y, endX, endY) ||
+        resolverlaberinto(matriz, x, y + 1, endX, endY) ||
+        resolverlaberinto(matriz, x - 1, y, endX, endY) ||
+        resolverlaberinto(matriz, x, y - 1, endX, endY))
         return true;
 
     matriz[y][x] = 0; // Marcar como no visitado (backtracking)
@@ -44,7 +38,6 @@ void generaryresolverLaberinto(int filas, int columnas) {
         matriz[i] = new int[columnas];
     }
 
-    // Generar laberinto aleatorio
     srand(time(NULL));
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
@@ -56,18 +49,23 @@ void generaryresolverLaberinto(int filas, int columnas) {
     matriz[0][1] = 0;                   // Entrada
     matriz[filas - 1][columnas - 2] = 0; // Salida
 
-    // Resolver el laberinto
-    solveMaze(matriz, 1, 0, columnas - 2, filas - 1);
+    int startX = 1;
+    int startY = 0;
+    int endX = columnas - 2;
+    int endY = filas - 1;
 
-    // Imprimir el laberinto con el camino más eficiente
+    // Resolver el laberinto
+    resolverlaberinto(matriz, startX, startY, endX, endY);
+
+    // Imprimir el laberinto con la entrada, salida y camino eficiente
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
             if (matriz[i][j] == 1) {
-                cout << matriz[i][j]; // Pared
+                cout << '#'; // Pared
             } else if (matriz[i][j] == 0) {
-                cout << matriz[i][j]; // Espacio libre
+                cout << ' '; // Espacio libre
             } else if (matriz[i][j] == 2) {
-                cout << matriz[i][j]; // Camino más eficiente
+                cout << 'C'; // Camino más eficiente
             }
         }
         cout << "\n";
@@ -80,45 +78,44 @@ void generaryresolverLaberinto(int filas, int columnas) {
     delete[] matriz;
 }
 
-// Funcion del menu principal
-
-void menu(){
+void menu() {
     system("cls");
-    cout<<"---- Menu Taller 1 ----"<<endl;
-    cout<<"Programado por Pablo Garcia Urzua"<<endl;
-    cout<<"------------------------"<<endl;
-    cout<<"Computacion paralela y distribuida, seccion 411"<<endl;
-    cout<<"1. Generar un laberinto aleatorio y resolverlo con una posible solucion"<<endl;
-    cout<<"2. Salir"<<endl;
-    cout<<"Ingrese una opcion: ";
-    cin>>opcion;
-    switch(opcion){
+    cout << "---- Menu Taller 1 ----" << endl;
+    cout << "Programado por Pablo Garcia Urzua" << endl;
+    cout << "------------------------" << endl;
+    cout << "Computacion paralela y distribuida, seccion 411" << endl;
+    cout << "1. Generar un laberinto aleatorio y resolverlo con una posible solucion" << endl;
+    cout << "2. Salir" << endl;
+    cout << "Ingrese una opcion: ";
+    cin >> opcion;
+    switch (opcion) {
         case 1:
             system("cls");
-            cout<<"Ingrese el tamñao del laberinto (Min 10x10, Max 50x50)"<<endl;
-            cout<<"Ancho: ";
-            cin>>columnas;
-            cout<<"Largo: ";
-            cin>>filas;
+            cout << "Ingrese los parametros del laberinto (Min 10x10, Max 50x50)" << endl;
+            cout << "Ancho: ";
+            cin >> columnas;
+            cout << "Largo: ";
+            cin >> filas;
             system("cls");
-            cout<<"Generando laberinto..."<<endl;
-			generaryresolverLaberinto(filas, columnas);
+            cout << "Generando laberinto..." << endl;
+            generaryresolverLaberinto(filas, columnas);
             system("pause");
             break;
         case 2:
             system("cls");
-            cout<<"Saliendo....."<<endl;
-			bucle++;
+            cout << "Saliendo....." << endl;
+            bucle++;
             break;
         default:
             system("cls");
-            cout<<"Opcion no valida"<<endl;
+            cout << "Opcion no valida, intentelo nuevamente" << endl;
+            system("pause");
             break;
     }
 }
 
 int main() {
-   while(bucle == 0){
-       menu();
-   }
+    while (bucle == 0) {
+        menu();
+    }
 }
