@@ -11,6 +11,7 @@ int bucle = 0;
 int opcion;
 int filas;
 int columnas;
+double densidad;
 
 bool resolverlaberinto(int **matriz, int x, int y, int endX, int endY) {
     if (x < 0 || y < 0 || x >= columnas || y >= filas || matriz[y][x] != 0)
@@ -31,7 +32,7 @@ bool resolverlaberinto(int **matriz, int x, int y, int endX, int endY) {
     return false;
 }
 
-void generaryresolverLaberinto(int filas, int columnas) {
+void generaryresolverLaberinto(int filas, int columnas, double densidad) {
     int **matriz;
     matriz = new int *[filas];
 
@@ -45,7 +46,8 @@ void generaryresolverLaberinto(int filas, int columnas) {
         srand(time(NULL));
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                matriz[i][j] = rand() % 2; // 0 para espacio libre, 1 para pared
+                double randomValue = static_cast<double>(rand()) / RAND_MAX;
+                matriz[i][j] = randomValue < densidad ? 1 : 0; // Obstáculo con probabilidad densidad
             }
         }
 
@@ -106,26 +108,33 @@ void menu() {
             cout << "Ingrese los parametros del laberinto (Min 5x5, Max 50x50)" << endl;
             cout << "Ancho: ";
             cin >> columnas;
-            if(columnas < 5 || columnas > 50){
+            if (columnas < 5 || columnas > 50) {
                 cout << "Ancho no valido, intentelo nuevamente" << endl;
                 system("pause");
                 break;
-            }
-            else{
+            } else {
                 cout << "Largo: ";
                 cin >> filas;
-                if(filas < 5 || filas > 50){
+                if (filas < 5 || filas > 50) {
                     system("cls");
                     cout << "Largo no valido, intentelo nuevamente" << endl;
                     system("pause");
                     break;
-                }
-                    else{
+                } else {
+                    cout << "Ingrese la densidad de obstaculos (0.0 - 1.0): ";
+                    cin >> densidad;
+                    if (densidad < 0.0 || densidad > 1.0) {
+                        system("cls");
+                        cout << "Densidad no valida, intentelo nuevamente" << endl;
+                        system("pause");
+                        break;
+                    } else {
                         system("cls");
                         cout << "Generando laberinto..." << endl;
-                        generaryresolverLaberinto(filas, columnas);
+                        generaryresolverLaberinto(filas, columnas, densidad);
                         system("pause");
                     }
+                }
             }
 
             break;
