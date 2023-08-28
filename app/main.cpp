@@ -93,7 +93,7 @@ void generaryresolverLaberinto(int filas, int columnas, double densidad) {
 void menu() {
     system("cls");
     cout << "---- Menu Taller 1 ----" << endl;
-    cout << "Programado por Pablo Garcia Urzua // Computacion paralela y distribuida, seccion 411" << endl << endl;
+    cout << "Programado por Pablo Garcia, Victor toledo, Fabian Rojas // Computacion paralela y distribuida, seccion 411" << endl << endl;
     cout << "------------------------" << endl;
     cout << "El programa se basa en el algoritmo de busqueda de profundidad (DFS - Depth First Seach)" << endl;
     cout <<"------------------------" << endl << endl;

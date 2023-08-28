@@ -4,7 +4,7 @@ Resolucion de laberintos mediante algoritmos en c++
 Integrantes:
 - Pablo Garcia Urzua
 - Victor Toledo Cerna
--
+- Fabian Rojas Gamboa
 
 Computacion Paralela y Distribuida
 Prof. Sebastian Salazar, Seccion 411
