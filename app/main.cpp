@@ -105,7 +105,7 @@ void menu() {
     switch (opcion) {
         case 1:
             system("cls");
-            densidad = 0.3; // constante importante para que el algoritmo funcione
+            densidad = 0.2; // constante importante para que el algoritmo funcione
             cout << "Ingrese los parametros del laberinto (Min 5x5, Max 50x50)" << endl;
             cout << "Ancho: ";
             cin >> columnas;
