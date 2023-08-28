@@ -105,38 +105,25 @@ void menu() {
     switch (opcion) {
         case 1:
             system("cls");
+            densidad = 0.3; // constante importante para que el algoritmo funcione
             cout << "Ingrese los parametros del laberinto (Min 5x5, Max 50x50)" << endl;
             cout << "Ancho: ";
             cin >> columnas;
-            if (columnas < 5 || columnas > 50) {
-                cout << "Ancho no valido, intentelo nuevamente" << endl;
+            cout << "Alto: ";
+            cin >> filas;
+            if(filas){
+                system("cls");
+                cout << "Generando laberinto..." << endl;
+                generaryresolverLaberinto(filas, columnas, densidad);
+                cout << "Laberinto generado y resuelto" << endl;
+                cout << "Guardado en laberinto_resuelto.txt" << endl;
                 system("pause");
-                break;
-            } else {
-                cout << "Largo: ";
-                cin >> filas;
-                if (filas < 5 || filas > 50) {
-                    system("cls");
-                    cout << "Largo no valido, intentelo nuevamente" << endl;
-                    system("pause");
-                    break;
-                } else {
-                    cout << "Ingrese la densidad de obstaculos (0.0 - 1.0): ";
-                    cin >> densidad;
-                    if (densidad < 0.0 || densidad > 1.0) {
-                        system("cls");
-                        cout << "Densidad no valida, intentelo nuevamente" << endl;
-                        system("pause");
-                        break;
-                    } else {
-                        system("cls");
-                        cout << "Generando laberinto..." << endl;
-                        generaryresolverLaberinto(filas, columnas, densidad);
-                        system("pause");
-                    }
-                }
             }
-
+            else{
+                system("cls");
+                cout << "Ingrese un valor valido" << endl;
+                system("pause");
+            }
             break;
         case 2:
             system("cls");
