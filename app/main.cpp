@@ -59,11 +59,25 @@ void generaryresolverLaberinto(int filas, int columnas, double densidad) {
         int startY = 0;
         int endX = columnas - 2;
         int endY = filas - 1;
-
+ofstream archivoNoResuelto("laberinto_no_resuelto.txt");
+        for (int i = 0; i < filas; i++) {
+    for (int j = 0; j < columnas; j++) {
+        if (matriz[i][j] == 1) {
+            archivoNoResuelto << '#'; // Pared
+        } else if (matriz[i][j] == 0) {
+            archivoNoResuelto << ' '; // Espacio libre
+        } else if (matriz[i][j] == 2) {
+            archivoNoResuelto << 'o'; // Camino visitado
+        }
+    }
+    archivoNoResuelto << "\n";
+}
+archivoNoResuelto.close();
+cout << "Laberinto sin resolver guardado en 'laberinto_no_resuelto.txt'" << endl;
         // Resolver el laberinto
         laberintoEncontrado = resolverlaberinto(matriz, startX, startY, endX, endY);
     }
-
+    
     // Crear y escribir en el archivo de texto
     ofstream archivo("laberinto_resuelto.txt");
     for (int i = 0; i < filas; i++) {
